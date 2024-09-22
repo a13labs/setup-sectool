@@ -6,7 +6,7 @@ inputs:
   version:
     description: "The version to install"
     required: true
-    default: "v0.0.3"
+    default: 0.0.3
 
 runs:
   using: "node12"

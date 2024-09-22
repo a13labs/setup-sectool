@@ -36,7 +36,7 @@ async function downloadBinary(version) {
 
 async function run() {
     try {
-        const version = core.getInput('version');
+        const version = "v" + core.getInput('version');
         const binaryPath = await downloadBinary(version);
 
         // Make the binary executable

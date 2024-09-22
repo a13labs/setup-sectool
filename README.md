@@ -11,7 +11,7 @@ steps:
   - name: Install SecTool
     uses: a13labs/setup-sectool@v1
     with:
-      version: 'v0.0.3'
+      version: 0.0.3
 
   - name: Run sectool
     run: sectool exec terraform init
