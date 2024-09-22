@@ -1,0 +1,17 @@
+name: "SecTool install action"
+description: "Install and use SecTool in GitHub Actions"
+author: "A13Labs"
+
+inputs:
+  version:
+    description: "The version to install"
+    required: true
+    default: "v0.0.3"
+
+runs:
+  using: "node12"
+  main: "index.js"
+
+branding:
+  icon: "terminal"
+  color: "blue"
