@@ -15,3 +15,5 @@ steps:
 
   - name: Run sectool
     run: sectool exec terraform init
+```
+
