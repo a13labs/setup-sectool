@@ -4,6 +4,7 @@ const os = require('os');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const unzipper = require('unzipper');
 
 // Determine the platform and architecture
 const platform = os.platform();
@@ -13,7 +14,7 @@ const arch = os.arch();
 const binaryBaseURL = 'https://github.com/a13labs/sectool/releases/download/';
 
 async function downloadBinary(version) {
-    const fileName = `sectool-${version}-${platform}-${arch}`;
+    const fileName = `sectool-${version}-${platform}-${arch}.zip`;
     const url = `${binaryBaseURL}${version}/${fileName}`;
     const outputPath = path.join(process.env['RUNNER_TEMP'], fileName);
 
@@ -23,12 +24,21 @@ async function downloadBinary(version) {
         const file = fs.createWriteStream(outputPath);
         https.get(url, function (response) {
             response.pipe(file);
-            file.on('finish', function () {
-                file.close(() => resolve(outputPath));
+            file.on('finish', async function () {
+                file.close(async () => {
+                    try {
+                        const unzipPath = path.join(process.env['RUNNER_TEMP'], `sectool-${version}`);
+                        await fs.createReadStream(outputPath)
+                            .pipe(unzipper.Extract({ path: unzipPath }))
+                            .promise();
+                        resolve(unzipPath + '/sectool');
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
             });
         }).on('error', function (err) {
-            fs.unlink(outputPath);
-            reject(err);
+            fs.unlink(outputPath, () => reject(err));
         });
     });
 }
