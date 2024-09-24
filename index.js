@@ -4,7 +4,7 @@ const os = require('os');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-const unzipper = require('unzipper');
+const unzipper = require('unzipper'); // eslint-disable-line no-unused-vars
 
 // Determine the platform and architecture
 const platform = os.platform();
@@ -14,7 +14,7 @@ const arch = os.arch();
 const binaryBaseURL = 'https://github.com/a13labs/sectool/releases/download/';
 
 async function downloadBinary(version) {
-    const fileName = `sectool-${version}-${platform}-${arch}.zip`;
+    const fileName = `sectool-${version}-${platform}-${arch}.zip`; // eslint-disable-line no-unused-vars
     const url = `${binaryBaseURL}${version}/${fileName}`;
     const outputPath = path.join(process.env['RUNNER_TEMP'], fileName);
 
@@ -27,11 +27,11 @@ async function downloadBinary(version) {
             file.on('finish', async function () {
                 file.close(async () => {
                     try {
-                        const unzipPath = path.join(process.env['RUNNER_TEMP'], `sectool-${version}`);
+                        const unzipPath = path.join(process.env['RUNNER_TEMP'], `sectool-${version}`); // eslint-disable-line no-unused-vars
                         await fs.createReadStream(outputPath)
                             .pipe(unzipper.Extract({ path: unzipPath }))
                             .promise();
-                        resolve(unzipPath + '/sectool');
+                        resolve(unzipPath + '/sectool'); // eslint-disable-line no-unused-vars
                     } catch (err) {
                         reject(err);
                     }
