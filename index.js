@@ -1,3 +1,4 @@
+
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const os = require('os');
@@ -61,7 +62,7 @@ async function run() {
         // Add the binary to the PATH
         core.addPath(path.dirname(binaryPath));
 
-        core.info('My Go tool is installed and added to the PATH');
+        core.info('Sectool is installed and added to the PATH');
     } catch (error) {
         core.setFailed(`Action failed with error ${error}`);
     }
