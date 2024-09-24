@@ -1,10 +1,9 @@
-
+const { https } = require('follow-redirects');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const os = require('os');
 const path = require('path');
 const fs = require('fs');
-const https = require('https');
 
 // Determine the platform and architecture
 const platform = os.platform();
