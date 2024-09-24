@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-const io = require('@actions/io');
 const os = require('os');
 const path = require('path');
 const fs = require('fs');
