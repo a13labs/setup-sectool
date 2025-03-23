@@ -6,7 +6,7 @@ inputs:
   version:
     description: "The version to install"
     required: true
-    default: 1.1.0
+    default: 1.1.1
 
 runs:
   using: "node20"
